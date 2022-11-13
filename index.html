@@ -34,13 +34,32 @@
       top: 100px;
       left: 100px;
     }
+
+    #rect-3 {
+      background-color: gold;
+      position: absolute;
+      top: 200px;
+      left: 200px;
+    }
   </style>
 </head>
 
 <body>
   <div id="rect-1" class="rect">1</div>
-  <!-- <div id="rect-2" class="rect">2</div> -->
+  <div id="rect-2" class="rect">2</div>
+  <div id="rect-3" class="rect">3</div>
   <script src="./src/index.js"></script>
+
+  <script>
+    const targetEl = document.getElementById('rect-1')
+    const moveModel = new DragMoveModel({ targetEl: targetEl, limitMoveBorder: true })
+
+    const targetEl2 = document.getElementById('rect-2')
+    const moveModel2 = new DragMoveModel({ targetEl: targetEl2, moveMode: 'position', limitMoveBorder: true })
+
+    const targetEl3 = document.getElementById('rect-3')
+    const moveModel3 = new DragMoveModel({ targetEl: targetEl3, limitMoveBorder: true, maxMoveX: 200, maxMoveY: 100, disableMoveEl: false })
+  </script>
 </body>
 
 </html>

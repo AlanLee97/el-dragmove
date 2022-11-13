@@ -16,6 +16,9 @@ class DragMoveModel {
   moveMode = 'transform' // transform为transform-translate方式移动，position为top,left方式移动
   callback = null // 回调函数，用于获取鼠标移动距离
   h5 = false // 是否用于h5
+  disableMoveEl = false // 是否限制移动
+  maxMoveX = 1000000 // x轴最大移动距离
+  maxMoveY = 1000000 // y轴最大移动距离
 
   constructor(config = {}, callback = () => { }) {
     this._initConfig(config)
@@ -30,6 +33,9 @@ class DragMoveModel {
     this.limitMoveBorder = !!config.limitMoveBorder
     this.moveMode = config.moveMode || 'transform'
     this.h5 = !!config.h5
+    this.disableMoveEl = !!config.disableMoveEl
+    this.maxMoveX = config.maxMoveX || this.maxMoveX
+    this.maxMoveY = config.maxMoveY || this.maxMoveY
   }
 
   // 初始化目标元素相关信息
@@ -154,26 +160,28 @@ class DragMoveModel {
     if (this.isMousedown) {
       // 往左
       if (pageX < this.startX) {
-        this.moveInsX = pageX - this.startX
+        this.moveInsX = this.moveInsX > -this.maxMoveX ? e.pageX - this.startX : -this.maxMoveX
       }
       // 往右
       if (pageX > this.startX) {
-        this.moveInsX = pageX - this.startX
+        this.moveInsX = this.moveInsX < this.maxMoveX ? e.pageX - this.startX : this.maxMoveX
       }
       // 往上
       if (pageY < this.startY) {
-        this.moveInsY = pageY - this.startY
+        this.moveInsY = this.moveInsY > -this.maxMoveY ? e.pageY - this.startY : -this.maxMoveY
       }
       // 往下
       if (pageY > this.startY) {
-        this.moveInsY = pageY - this.startY
+        this.moveInsY = this.moveInsY < this.maxMoveY ? e.pageY - this.startY : this.maxMoveY
       }
-      // console.log('moveInsX', this.moveInsX, 'moveInsY', this.moveInsY)
-      if (this.moveMode === 'position') {
-        this._topLeftMoveTargetEl()
-      } else {
-        this._translateMoveEl()
+      if(!this.disableMoveEl) {
+        if (this.moveMode === 'position') {
+          this._topLeftMoveTargetEl()
+        } else {
+          this._translateMoveEl()
+        }
       }
+      
       // 计算第三边的长度（勾股定理 a^2 + b^2 = c^2）
       let c = Math.round(Math.pow((this.moveInsX * this.moveInsX + this.moveInsY * this.moveInsY), 0.5))
       this.callback(this.moveInsX, this.moveInsY, c)
@@ -225,9 +233,3 @@ class DragMoveModel {
     this.document.removeEventListener(upEvent, this._mouseupHandler)
   }
 }
-
-const targetEl = document.getElementById('rect-1')
-const moveModel = new DragMoveModel({ targetEl: targetEl, limitMoveBorder: true })
-
-const targetEl2 = document.getElementById('rect-2')
-const moveModel2 = new DragMoveModel({ targetEl: targetEl2, moveMode: 'position', limitMoveBorder: true })
