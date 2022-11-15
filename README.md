@@ -13,7 +13,7 @@
 <script src="https://unpkg.com/el-dragmove@latest/dist/index.js"></script>
 <script>
   const targetEl = document.getElementById('rect-1')
-	const moveModel = new DragMoveModel({ targetEl: targetEl }, (x, y, z) => console.log(x, y, z))
+  const moveModel = new DragMoveModel({ targetEl: targetEl }, (x, y, z) => console.log(x, y, z))
 </script>
 ```
 
@@ -59,3 +59,6 @@ const elDragmove = new Dragmove({
 ```javascript
 moveModel.destroy()
 ```
+
+# 实现原理解析
+[https://juejin.cn/post/7165405623725588493](https://juejin.cn/post/7165405623725588493)
