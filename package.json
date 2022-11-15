@@ -1,17 +1,23 @@
 {
   "name": "el-dragmove",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "drag move element.",
-  "keywords": ["drag", "move"],
-  "main": "src/index.js",
+  "keywords": [
+    "drag",
+    "move"
+  ],
+  "main": "dist/index.mjs",
   "repository": {
     "type": "git",
     "url": "git://github.com/AlanLee97/el-dragmove.git"
   },
-  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --build && node scripts/mv.js"
   },
   "author": "AlanLee",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "fs-extra": "^10.1.0",
+    "typescript": "^4.8.4"
+  }
 }
