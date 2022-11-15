@@ -1,6 +1,6 @@
 {
   "name": "el-dragmove",
-  "version": "0.0.2-beta",
+  "version": "0.0.2-beta.1",
   "description": "drag move element.",
   "keywords": [
     "drag",
@@ -8,7 +8,8 @@
   ],
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "example"
   ],
   "repository": {
     "type": "git",
