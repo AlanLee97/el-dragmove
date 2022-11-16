@@ -44,22 +44,15 @@ const elDragmove = new Dragmove({
 - callback， 回调函数，获取鼠标移动距离
 
 ### config参数配置 | config`s properties
-| 属性 | 说明 | 类型 | 默认值 | 可选值 |
+| 属性 property | 说明 description | 类型 type | 默认值 defalut | 可选值 optional |
 | --- | --- | --- | --- | --- |
-| targetEl | 目标元素，需要拖动的元素
-The element that needs to be dragged | HTMLElement | document.body |  |
-| limitMoveBorder | 是否限制拖动边界
-Whether to restrict drag boundaries | Boolean | false |  |
-| moveMode | 拖动实现方式，transform为transform-translate方式移动，position为top,left方式移动
-Drag implementation | String | transform | | `transform`,`position` |
-| h5 | 是否是h5
-Whether it is H5 or not | Boolean | false |  |
-| disableMoveEl | 是否限制移动
-Whether to restrict movement | Boolean | false |  |
-| maxMoveX | x轴最大移动距离
-Maximum distance traveled on the x-axis | Number | 1000000 |  |
-| maxMoveY | y轴最大移动距离
-Maximum distance traveled on the y-axis | Number | 1000000 |  |
+| targetEl | 目标元素，需要拖动的元素<br>The element that needs to be dragged | HTMLElement | document.body |  |
+| limitMoveBorder | 是否限制拖动边界<br>Whether to restrict drag boundaries | Boolean | false |  |
+| moveMode | 拖动实现方式，transform为transform-translate方式移动，position为top,left方式移动<br>Drag implementation | String | transform |`transform`,`position` |
+| h5 | 是否是h5<br>Whether it is H5 or not | Boolean | false |  |
+| disableMoveEl | 是否限制移动<br>Whether to restrict movement | Boolean | false |  |
+| maxMoveX | x轴最大移动距离<br>Maximum distance traveled on the x-axis | Number | 1000000 |  |
+| maxMoveY | y轴最大移动距离<br>Maximum distance traveled on the y-axis | Number | 1000000 |  |
 
 
 ## 销毁方法 | Destroy
