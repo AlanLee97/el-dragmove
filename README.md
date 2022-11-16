@@ -51,7 +51,7 @@ The element that needs to be dragged | HTMLElement | document.body |  |
 | limitMoveBorder | 是否限制拖动边界
 Whether to restrict drag boundaries | Boolean | false |  |
 | moveMode | 拖动实现方式，transform为transform-translate方式移动，position为top,left方式移动
-Drag implementation | String | transform | `transform`,`position` |
+Drag implementation | String | transform | | `transform`,`position` |
 | h5 | 是否是h5
 Whether it is H5 or not | Boolean | false |  |
 | disableMoveEl | 是否限制移动
