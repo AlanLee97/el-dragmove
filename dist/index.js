@@ -19,6 +19,7 @@
   disableMoveEl = false // 是否限制移动
   maxMoveX = 1000000 // x轴最大移动距离
   maxMoveY = 1000000 // y轴最大移动距离
+  rootDom = document // 根文档
 
   constructor(config = {}, callback = () => { }) {
     this._initConfig(config)
@@ -29,13 +30,14 @@
 
   // 初始化配置
   _initConfig(config) {
-    this.targetEl = config.targetEl || document.body
+    this.targetEl = config.targetEl || this.rootDom.body
     this.limitMoveBorder = !!config.limitMoveBorder
     this.moveMode = config.moveMode || 'transform'
     this.h5 = !!config.h5
     this.disableMoveEl = !!config.disableMoveEl
     this.maxMoveX = config.maxMoveX || this.maxMoveX
     this.maxMoveY = config.maxMoveY || this.maxMoveY
+    // this.rootDom = config.rootDom || this.rootDom
   }
 
   // 初始化目标元素相关信息
@@ -160,19 +162,19 @@
     if (this.isMousedown) {
       // 往左
       if (pageX < this.startX) {
-        this.moveInsX = this.moveInsX > -this.maxMoveX ? e.pageX - this.startX : -this.maxMoveX
+        this.moveInsX = this.moveInsX > -this.maxMoveX ? pageX - this.startX : -this.maxMoveX
       }
       // 往右
       if (pageX > this.startX) {
-        this.moveInsX = this.moveInsX < this.maxMoveX ? e.pageX - this.startX : this.maxMoveX
+        this.moveInsX = this.moveInsX < this.maxMoveX ? pageX - this.startX : this.maxMoveX
       }
       // 往上
       if (pageY < this.startY) {
-        this.moveInsY = this.moveInsY > -this.maxMoveY ? e.pageY - this.startY : -this.maxMoveY
+        this.moveInsY = this.moveInsY > -this.maxMoveY ? pageY - this.startY : -this.maxMoveY
       }
       // 往下
       if (pageY > this.startY) {
-        this.moveInsY = this.moveInsY < this.maxMoveY ? e.pageY - this.startY : this.maxMoveY
+        this.moveInsY = this.moveInsY < this.maxMoveY ? pageY - this.startY : this.maxMoveY
       }
       if(!this.disableMoveEl) {
         if (this.moveMode === 'position') {
@@ -218,9 +220,9 @@
     const moveEvent = this.h5 ? 'touchmove' : 'mousemove'
     const downEvent = this.h5 ? 'touchstart' : 'mousedown'
     const upEvent = this.h5 ? 'touchend' : 'mouseup'
-    document.addEventListener(moveEvent, this._mousemoveHandler)
+    this.rootDom.addEventListener(moveEvent, this._mousemoveHandler)
     this.targetEl && this.targetEl.addEventListener(downEvent, this._mousedownHandler)
-    document.addEventListener(upEvent, this._mouseupHandler)
+    this.rootDom.addEventListener(upEvent, this._mouseupHandler)
   }
 
   // 销毁方法
@@ -229,7 +231,7 @@
     const downEvent = this.h5 ? 'touchstart' : 'mousedown'
     const upEvent = this.h5 ? 'touchend' : 'mouseup'
     this.targetEl && this.targetEl.removeEventListener(moveEvent, this._mousedownHandler)
-    this.document.removeEventListener(downEvent, this._mousemoveHandler)
-    this.document.removeEventListener(upEvent, this._mouseupHandler)
+    this.rootDom.removeEventListener(downEvent, this._mousemoveHandler)
+    this.rootDom.removeEventListener(upEvent, this._mouseupHandler)
   }
 }

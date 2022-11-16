@@ -73,19 +73,19 @@ var DragMoveModel = /** @class */ (function () {
             if (_this.isMousedown) {
                 // 往左
                 if (pageX < _this.startX) {
-                    _this.moveInsX = _this.moveInsX > -_this.maxMoveX ? e.pageX - _this.startX : -_this.maxMoveX;
+                    _this.moveInsX = _this.moveInsX > -_this.maxMoveX ? pageX - _this.startX : -_this.maxMoveX;
                 }
                 // 往右
                 if (pageX > _this.startX) {
-                    _this.moveInsX = _this.moveInsX < _this.maxMoveX ? e.pageX - _this.startX : _this.maxMoveX;
+                    _this.moveInsX = _this.moveInsX < _this.maxMoveX ? pageX - _this.startX : _this.maxMoveX;
                 }
                 // 往上
                 if (pageY < _this.startY) {
-                    _this.moveInsY = _this.moveInsY > -_this.maxMoveY ? e.pageY - _this.startY : -_this.maxMoveY;
+                    _this.moveInsY = _this.moveInsY > -_this.maxMoveY ? pageY - _this.startY : -_this.maxMoveY;
                 }
                 // 往下
                 if (pageY > _this.startY) {
-                    _this.moveInsY = _this.moveInsY < _this.maxMoveY ? e.pageY - _this.startY : _this.maxMoveY;
+                    _this.moveInsY = _this.moveInsY < _this.maxMoveY ? pageY - _this.startY : _this.maxMoveY;
                 }
                 if (!_this.disableMoveEl) {
                     if (_this.moveMode === 'position') {

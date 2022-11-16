@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drag Move PC</title>
+  <title>Drag Move H5</title>
   <style>
     * {
       padding: 0;
@@ -53,15 +53,15 @@
   <script>
     // translate方式移动
     const targetEl = document.getElementById('rect-1')
-    const moveModel = new DragMoveModel({ targetEl: targetEl, limitMoveBorder: true })
+    const moveModel = new DragMoveModel({ targetEl: targetEl, limitMoveBorder: true, h5: true })
 
     // top，left方式移动
     const targetEl2 = document.getElementById('rect-2')
-    const moveModel2 = new DragMoveModel({ targetEl: targetEl2, moveMode: 'position', limitMoveBorder: true })
+    const moveModel2 = new DragMoveModel({ targetEl: targetEl2, moveMode: 'position', limitMoveBorder: true, h5: true })
 
     // 限制边界距离
     const targetEl3 = document.getElementById('rect-3')
-    const moveModel3 = new DragMoveModel({ targetEl: targetEl3, limitMoveBorder: true, maxMoveX: 200, maxMoveY: 100, disableMoveEl: false })
+    const moveModel3 = new DragMoveModel({ targetEl: targetEl3, limitMoveBorder: true, maxMoveX: 200, maxMoveY: 100, disableMoveEl: false, h5: true })
   </script>
 </body>
 

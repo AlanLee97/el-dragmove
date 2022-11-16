@@ -1,7 +1,19 @@
+
+export interface DragMoveConfig {
+  targetEl: HTMLElement
+  rootDom?: Document
+  limitMoveBorder?: boolean
+  moveMode?: 'transform' | 'position'
+  h5?: boolean
+  disableMoveEl?: boolean
+  maxMoveX?: number
+  maxMoveY?: number
+}
+
 /**
  * 拖动模型
  * */
- class DragMoveModel {
+class DragMoveModel {
   startX = 0 // 按下的鼠标x值
   startY = 0 // 按下的鼠标y值
   moveInsX = 0 // 移动的x的值（从0开始累加）
@@ -19,8 +31,9 @@
   disableMoveEl = false // 是否限制移动
   maxMoveX = 1000000 // x轴最大移动距离
   maxMoveY = 1000000 // y轴最大移动距离
+  rootDom = document // 根文档
 
-  constructor(config = {}, callback = () => { }) {
+  constructor(config = {} as DragMoveConfig, callback = () => { }) {
     this._initConfig(config)
     this._initEvent()
     this._initTragetElInfo()
@@ -28,14 +41,15 @@
   }
 
   // 初始化配置
-  _initConfig(config) {
-    this.targetEl = config.targetEl || document.body
+  _initConfig(config: DragMoveConfig) {
+    this.targetEl = config.targetEl || this.rootDom.body
     this.limitMoveBorder = !!config.limitMoveBorder
     this.moveMode = config.moveMode || 'transform'
     this.h5 = !!config.h5
     this.disableMoveEl = !!config.disableMoveEl
     this.maxMoveX = config.maxMoveX || this.maxMoveX
     this.maxMoveY = config.maxMoveY || this.maxMoveY
+    this.rootDom = config.rootDom || this.rootDom
   }
 
   // 初始化目标元素相关信息
@@ -49,12 +63,12 @@
   }
 
   // 获取style的transform的属性值translate
-  _getStyleTransformProp(transform = '', prop = 'scale') {
-    transform = transform.replaceAll(', ', ',').trim()
+  _getStyleTransformProp(transform: string = '', prop = 'scale') {
+    transform = transform.replace(/, /g, ',').trim()
     let strArr = transform.split(' ')
     let res = ''
     strArr.forEach(str => {
-      if (str.includes(prop)) {
+      if (str.indexOf(prop) > -1) {
         res = str
       }
     })
@@ -65,11 +79,11 @@
   _calcTargetTranlate = () => {
     if (this.targetEl) {
       let translate = this._getStyleTransformProp(this.targetEl.style.transform, 'translate3d')
-      if (translate.includes('translate3d')) {
+      if (translate.indexOf('translate3d') > -1) {
         let reg = /\((.*)\)/g
         let res = reg.exec(translate)
         if (res) {
-          translate = res[1].replaceAll(', ', ',')
+          translate = res[1].replace(/, /g, ',')
         }
         let translateArr = translate.replace('(', '').replace(')', '').split(',')
         this.targetElTx = +translateArr[0].replace('px', '') || 0
@@ -81,9 +95,9 @@
   // 设置transform属性
   _setTransformProp(transform = '', prop = '', value = '') {
     let reg = new RegExp(`${prop}\((.*)\)`, 'g')
-    if (transform.includes(prop)) {
-      let propList = transform.replaceAll(', ', ',').trim().split(' ')
-      let newPropList = propList.map(item => item.replaceAll(reg, `${prop}(${value})`))
+    if (transform.indexOf(prop) > -1) {
+      let propList = transform.replace(/, /g, ',').trim().split(' ')
+      let newPropList = propList.map(item => item.replace(reg, `${prop}(${value})`))
       transform = newPropList.join(' ')
     } else {
       transform = `${prop}(${value}) ` + transform
@@ -160,19 +174,19 @@
     if (this.isMousedown) {
       // 往左
       if (pageX < this.startX) {
-        this.moveInsX = this.moveInsX > -this.maxMoveX ? e.pageX - this.startX : -this.maxMoveX
+        this.moveInsX = this.moveInsX > -this.maxMoveX ? pageX - this.startX : -this.maxMoveX
       }
       // 往右
       if (pageX > this.startX) {
-        this.moveInsX = this.moveInsX < this.maxMoveX ? e.pageX - this.startX : this.maxMoveX
+        this.moveInsX = this.moveInsX < this.maxMoveX ? pageX - this.startX : this.maxMoveX
       }
       // 往上
       if (pageY < this.startY) {
-        this.moveInsY = this.moveInsY > -this.maxMoveY ? e.pageY - this.startY : -this.maxMoveY
+        this.moveInsY = this.moveInsY > -this.maxMoveY ? pageY - this.startY : -this.maxMoveY
       }
       // 往下
       if (pageY > this.startY) {
-        this.moveInsY = this.moveInsY < this.maxMoveY ? e.pageY - this.startY : this.maxMoveY
+        this.moveInsY = this.moveInsY < this.maxMoveY ? pageY - this.startY : this.maxMoveY
       }
       if(!this.disableMoveEl) {
         if (this.moveMode === 'position') {
@@ -218,9 +232,9 @@
     const moveEvent = this.h5 ? 'touchmove' : 'mousemove'
     const downEvent = this.h5 ? 'touchstart' : 'mousedown'
     const upEvent = this.h5 ? 'touchend' : 'mouseup'
-    document.addEventListener(moveEvent, this._mousemoveHandler)
+    this.rootDom.addEventListener(moveEvent, this._mousemoveHandler)
     this.targetEl && this.targetEl.addEventListener(downEvent, this._mousedownHandler)
-    document.addEventListener(upEvent, this._mouseupHandler)
+    this.rootDom.addEventListener(upEvent, this._mouseupHandler)
   }
 
   // 销毁方法
@@ -229,7 +243,7 @@
     const downEvent = this.h5 ? 'touchstart' : 'mousedown'
     const upEvent = this.h5 ? 'touchend' : 'mouseup'
     this.targetEl && this.targetEl.removeEventListener(moveEvent, this._mousedownHandler)
-    this.document.removeEventListener(downEvent, this._mousemoveHandler)
-    this.document.removeEventListener(upEvent, this._mouseupHandler)
+    this.rootDom.removeEventListener(downEvent, this._mousemoveHandler)
+    this.rootDom.removeEventListener(upEvent, this._mouseupHandler)
   }
 }

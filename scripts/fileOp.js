@@ -10,5 +10,5 @@ async function fileOp(ops = 'move', files) {
   }
 }
 
-fileOp('move', [{ src: `dist/main.js`, dest: `dist/es/index.js`, overwrite: true }])
+fileOp('move', [{ src: `dist/index.es.js`, dest: `dist/es/index.js`, overwrite: true }])
 fileOp('copy', [{ src: `lib/index.js`, dest: `dist/index.js`, overwrite: true }])

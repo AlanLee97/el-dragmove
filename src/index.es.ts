@@ -174,19 +174,19 @@ export default class DragMoveModel {
     if (this.isMousedown) {
       // 往左
       if (pageX < this.startX) {
-        this.moveInsX = this.moveInsX > -this.maxMoveX ? e.pageX - this.startX : -this.maxMoveX
+        this.moveInsX = this.moveInsX > -this.maxMoveX ? pageX - this.startX : -this.maxMoveX
       }
       // 往右
       if (pageX > this.startX) {
-        this.moveInsX = this.moveInsX < this.maxMoveX ? e.pageX - this.startX : this.maxMoveX
+        this.moveInsX = this.moveInsX < this.maxMoveX ? pageX - this.startX : this.maxMoveX
       }
       // 往上
       if (pageY < this.startY) {
-        this.moveInsY = this.moveInsY > -this.maxMoveY ? e.pageY - this.startY : -this.maxMoveY
+        this.moveInsY = this.moveInsY > -this.maxMoveY ? pageY - this.startY : -this.maxMoveY
       }
       // 往下
       if (pageY > this.startY) {
-        this.moveInsY = this.moveInsY < this.maxMoveY ? e.pageY - this.startY : this.maxMoveY
+        this.moveInsY = this.moveInsY < this.maxMoveY ? pageY - this.startY : this.maxMoveY
       }
       if(!this.disableMoveEl) {
         if (this.moveMode === 'position') {
