@@ -12,7 +12,7 @@
 ```html
 <div id="rect-1" class="rect">1</div>
 
-<script src="https://unpkg.com/el-dragmove@latest/dist/index.js"></script>
+<script src="https://unpkg.com/el-dragmove@latest/dist/index.min.js"></script>
 <script>
   const targetEl = document.getElementById('rect-1')
   const moveModel = new DragMoveModel({ targetEl: targetEl }, (x, y, z) => console.log(x, y, z))
