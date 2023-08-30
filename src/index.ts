@@ -13,7 +13,7 @@ export interface DragMoveConfig {
 /**
  * 拖动模型
  * */
-class DragMoveModel {
+export default class DragMoveModel {
   startX = 0 // 按下的鼠标x值
   startY = 0 // 按下的鼠标y值
   moveInsX = 0 // 移动的x的值（从0开始累加）
