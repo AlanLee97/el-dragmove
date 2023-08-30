@@ -6,7 +6,9 @@ module.exports = {
     node: true,
   },
   extends: 'airbnb-base',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
+    sourceType: 'module',
     ecmaVersion: 'latest',
   },
   ignorePatterns: ['dist/*.js'],
@@ -21,5 +23,7 @@ module.exports = {
     'max-len': 0,
     'import/no-extraneous-dependencies': 0,
     'linebreak-style': 0,
+    'class-methods-use-this': 0,
+    'no-useless-escape': 1,
   },
 };

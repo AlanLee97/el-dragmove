@@ -31,16 +31,16 @@ export default class DragMoveModel {
     maxMoveY: number;
     rootDom: Document;
     constructor(config?: DragMoveConfig, callback?: () => void);
-    _initConfig(config: DragMoveConfig): void;
-    _initTragetElInfo(): void;
-    _getStyleTransformProp(transform?: string, prop?: string): string;
-    _calcTargetTranlate: () => void;
-    _setTransformProp(transform?: string, prop?: string, value?: string): string;
-    _translateMoveEl(): void;
-    _topLeftMoveTargetEl: () => void;
-    _mousemoveHandler: (e: any) => void;
-    _mousedownHandler: (e: any) => void;
-    _mouseupHandler: (e: any) => void;
-    _initEvent(): void;
+    private initConfig;
+    private initTragetElInfo;
+    private getStyleTransformProp;
+    private calcTargetTranlate;
+    private setTransformProp;
+    private translateMoveEl;
+    private topLeftMoveTargetEl;
+    private mousemoveHandler;
+    private mousedownHandler;
+    private mouseupHandler;
+    private initEvent;
     destroy(): void;
 }
