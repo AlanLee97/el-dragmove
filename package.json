@@ -4,6 +4,8 @@
   "description": "drag move element.",
   "keywords": [
     "drag",
+    "dragmove",
+    "dragmove element",
     "move"
   ],
   "main": "dist/index.js",

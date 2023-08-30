@@ -14,39 +14,22 @@ export interface DragMoveConfig {
  * */
 export default class DragMoveModel {
   startX = 0; // 按下的鼠标x值
-
   startY = 0; // 按下的鼠标y值
-
   moveInsX = 0; // 移动的x的值（从0开始累加）
-
   moveInsY = 0; // 移动的y的值（从0开始累加）
-
   isMousedown = false; // 是否按下鼠标
-
   targetEl = null; // 目标元素
-
   targetElTx = 0; // 目标元素的translate的x的值
-
   targetElTy = 0; // 目标元素的translate的y的值
-
   initTargetElTop = 0; // 目标元素的初始top值
-
   initTargetElLeft = 0; // 目标元素的初始left值
-
   limitMoveBorder = false; // 限制移动边界
-
   moveMode = 'transform'; // transform为transform-translate方式移动，position为top,left方式移动
-
   callback = null; // 回调函数，用于获取鼠标移动距离
-
   h5 = false; // 是否用于h5
-
   disableMoveEl = false; // 是否限制移动
-
   maxMoveX = 1000000; // x轴最大移动距离
-
   maxMoveY = 1000000; // y轴最大移动距离
-
   rootDom = document; // 根文档
 
   constructor(config = {} as DragMoveConfig, callback = () => { }) {

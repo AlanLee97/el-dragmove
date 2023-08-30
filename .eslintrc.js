@@ -11,7 +11,7 @@ module.exports = {
     sourceType: 'module',
     ecmaVersion: 'latest',
   },
-  ignorePatterns: ['dist/*.js'],
+  ignorePatterns: ['dist/*'],
   rules: {
     // 0 - off, 1 - warn, 2 - error
     'import/extensions': 1,
@@ -25,5 +25,6 @@ module.exports = {
     'linebreak-style': 0,
     'class-methods-use-this': 0,
     'no-useless-escape': 1,
+    'lines-between-class-members': 0,
   },
 };
